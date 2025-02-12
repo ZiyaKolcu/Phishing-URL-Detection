@@ -1,1 +1,6 @@
-temp_key: temp_value
+COLUMNS:
+  url: str
+  label: str
+
+TARGET_COLUMN:
+  name: label
