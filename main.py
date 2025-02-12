@@ -2,6 +2,9 @@ from PhishingDetection import logger
 from PhishingDetection.pipeline.data_ingestion_pipeline import (
     DataIngestionTrainingPipeline,
 )
+from PhishingDetection.pipeline.data_transformation_pipeline import (
+    DataTransformationTrainingPipeline,
+)
 from PhishingDetection.pipeline.data_validation_pipeline import (
     DataValidationTrainingPipeline,
 )
@@ -26,6 +29,17 @@ try:
     data_validation.initiate_data_validation()
     logger.info(f">>>>> {STAGE_NAME} completed <<<<<")
 
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Data Transformation stage"
+
+try:
+    logger.info(f">>>>> {STAGE_NAME} started <<<<<")
+    data_transformation = DataTransformationTrainingPipeline()
+    data_transformation.initiate_data_transformation()
+    logger.info(f">>>>> {STAGE_NAME} completed <<<<<")
 except Exception as e:
     logger.exception(e)
     raise e
