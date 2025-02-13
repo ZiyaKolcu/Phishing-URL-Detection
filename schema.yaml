@@ -3,4 +3,4 @@ COLUMNS:
   label: str
 
 TARGET_COLUMN:
-  name: label
+  name: class_url
