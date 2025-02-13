@@ -21,5 +21,5 @@ class ModelTrainer:
         classifier.fit(train_x, train_y)
 
         joblib.dump(
-            classifier, os.path.join(self.config.model_dir, self.config.model_name)
+            classifier, os.path.join(self.config.root_dir, self.config.model_name)
         )

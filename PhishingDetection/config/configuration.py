@@ -6,6 +6,7 @@ from PhishingDetection.entity.config_entity import (
     DataValidationConfig,
     DataTransformationConfig,
     ModelTrainerConfig,
+    ModelEvaluationConfig,
 )
 from dotenv import load_dotenv
 
@@ -65,7 +66,6 @@ class ConfigurationManager:
 
         model_trainer_config = ModelTrainerConfig(
             root_dir=config.root_dir,
-            model_dir=config.model_dir,
             train_data_path=config.train_data_path,
             test_data_path=config.test_data_path,
             model_name=config.model_name,
@@ -75,4 +75,20 @@ class ConfigurationManager:
         )
         return model_trainer_config
 
-    
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        params = self.params.RandomForestClassifier
+        schema = self.schema.TARGET_COLUMN
+
+        create_directories([config.root_dir])
+
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            all_params=params,
+            metric_file_name=config.metric_file_name,
+            target_column=schema.name,
+            mlflow_uri=os.getenv("MLFLOW_TRACKING_URI"),
+        )
+        return model_evaluation_config

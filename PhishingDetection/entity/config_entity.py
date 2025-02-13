@@ -25,7 +25,6 @@ class DataTransformationConfig:
 @dataclass
 class ModelTrainerConfig:
     root_dir: Path
-    model_dir: Path
     train_data_path: Path
     test_data_path: Path
     model_name: str
@@ -33,3 +32,13 @@ class ModelTrainerConfig:
     max_features: str
     target_column: str
 
+
+@dataclass
+class ModelEvaluationConfig:
+    root_dir: Path
+    test_data_path: Path
+    model_path: Path
+    all_params: dict
+    metric_file_name: Path
+    target_column: str
+    mlflow_uri: str
