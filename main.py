@@ -61,3 +61,16 @@ try:
 except Exception as e:
     logger.exception(e)
     raise e
+
+
+STAGE_NAME = "Model Evaluation Stage"
+
+try:
+    logger.info(f">>>>> stage {STAGE_NAME} started <<<<<")
+    data_ingestion = ModelEvaluationTrainingPipeline()
+    data_ingestion.initiate_model_evaluation()
+    logger.info(f">>>>> stage {STAGE_NAME} completed <<<<<")
+
+except Exception as e:
+    logger.exception(e)
+    raise e

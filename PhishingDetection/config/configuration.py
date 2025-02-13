@@ -92,3 +92,5 @@ class ConfigurationManager:
             mlflow_uri=os.getenv("MLFLOW_TRACKING_URI"),
         )
         return model_evaluation_config
+
+        ModelEvaluationConfig,
