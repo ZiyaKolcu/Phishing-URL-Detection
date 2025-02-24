@@ -55,13 +55,13 @@ class ConfigurationManager:
         data_transformation_config = DataTransformationConfig(
             root_dir=config.root_dir,
             data_path=config.data_path,
-            vectorizer_path=config.vectorizer_path
+            vectorizer_path=config.vectorizer_path,
         )
         return data_transformation_config
 
     def get_model_trainer_config(self) -> ModelTrainerConfig:
         config = self.config.model_trainer
-        params = self.params.RandomForestClassifier
+        params = self.params.LogisticRegression
         schema = self.schema.TARGET_COLUMN
         create_directories([config.root_dir])
 
@@ -69,9 +69,10 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             train_data_path=config.train_data_path,
             test_data_path=config.test_data_path,
+            train_label_path=config.train_label_path,
+            test_label_path=config.test_label_path,
             model_name=config.model_name,
-            n_estimators=params.n_estimators,
-            max_features=params.max_features,
+            max_iter=params.max_iter,
             target_column=schema.name,
         )
         return model_trainer_config

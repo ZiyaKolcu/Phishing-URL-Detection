@@ -2,7 +2,8 @@ import pandas as pd
 import os
 from PhishingDetection.entity.config_entity import ModelTrainerConfig
 from PhishingDetection import logger
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from scipy.sparse import load_npz
 import joblib
 
 
@@ -11,15 +12,11 @@ class ModelTrainer:
         self.config = config
 
     def train(self):
-        train_data = pd.read_csv(self.config.train_data_path)
-        train_x = train_data.drop([self.config.target_column], axis=1)
-        train_y = train_data[[self.config.target_column]].values.ravel()
+        X_train = load_npz(self.config.train_data_path)
+        y_train = pd.read_csv(self.config.train_label_path).values.ravel()
+        logger.info("Loaded X_train and y_train")
 
-        classifier = RandomForestClassifier(
-            n_estimators=self.config.n_estimators, max_features=self.config.max_features
-        )
-        classifier.fit(train_x, train_y)
+        lr = LogisticRegression(max_iter=self.config.max_iter)
+        lr.fit(X_train, y_train)
 
-        joblib.dump(
-            classifier, os.path.join(self.config.root_dir, self.config.model_name)
-        )
+        joblib.dump(lr, os.path.join(self.config.root_dir, self.config.model_name))
