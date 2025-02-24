@@ -79,7 +79,7 @@ class ConfigurationManager:
 
     def get_model_evaluation_config(self) -> ModelEvaluationConfig:
         config = self.config.model_evaluation
-        params = self.params.RandomForestClassifier
+        params = self.params.LogisticRegression
         schema = self.schema.TARGET_COLUMN
 
         create_directories([config.root_dir])
@@ -87,6 +87,7 @@ class ConfigurationManager:
         model_evaluation_config = ModelEvaluationConfig(
             root_dir=config.root_dir,
             test_data_path=config.test_data_path,
+            test_label_path=config.test_label_path,
             model_path=config.model_path,
             all_params=params,
             metric_file_name=config.metric_file_name,
@@ -94,5 +95,3 @@ class ConfigurationManager:
             mlflow_uri=os.getenv("MLFLOW_TRACKING_URI"),
         )
         return model_evaluation_config
-
-        ModelEvaluationConfig,
