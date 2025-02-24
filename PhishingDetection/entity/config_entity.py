@@ -20,6 +20,7 @@ class DataValidationConfig:
 class DataTransformationConfig:
     root_dir: Path
     data_path: Path
+    vectorizer_path: Path
 
 
 @dataclass

@@ -10,7 +10,7 @@ from nltk.stem.snowball import SnowballStemmer
 from PhishingDetection import logger
 from PhishingDetection.entity.config_entity import DataTransformationConfig
 from scipy.sparse import save_npz
-
+import joblib
 
 class DataTransformation:
     def __init__(self, config):
@@ -36,14 +36,16 @@ class DataTransformation:
         cv = CountVectorizer()
         feature = cv.fit_transform(data.text_sent)
 
+        joblib.dump(cv, self.config.vectorizer_path)
+
         X_train, X_test, y_train, y_test = train_test_split(
             feature, data.label, test_size=0.2, shuffle=True
         )
         logger.info("Train Test split completed")
 
         # Save sparse matrices in .npz format
-        train_file_path = os.path.join(self.config.root_dir, "train.npz")
-        test_file_path = os.path.join(self.config.root_dir, "test.npz")
+        train_file_path = os.path.join(self.config.root_dir, "X_train.npz")
+        test_file_path = os.path.join(self.config.root_dir, "X_test.npz")
         save_npz(train_file_path, X_train)
         save_npz(test_file_path, X_test)
 
