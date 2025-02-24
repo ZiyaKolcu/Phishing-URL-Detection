@@ -10,8 +10,6 @@ tqdm
 ensure
 joblib
 types-PyYAML
-Flask
-Flask-Cors
 python-dotenv
 psycopg2
 nltk
