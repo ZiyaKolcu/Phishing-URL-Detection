@@ -2,6 +2,4 @@
 
 ## Project Purpose
 
-This project aims to develop a Phishing URL Detection system using Machine Learning to classify URLs as either phishing or legitimate based on their features.
-
-By analyzing various characteristics of URLs such as length, presence of special characters, domain-related information, and other heuristic-based attributes the model will learn to distinguish between safe and malicious links. The goal is to provide an efficient and lightweight solution for identifying phishing attempts, which can be integrated into security tools or used as a standalone application for detecting harmful links.
+This project aims to detect phishing URLs using machine learning techniques. By leveraging NLP-based URL analysis, the model identifies patterns and characteristics that differentiate phishing links from legitimate ones. A logistic regression model is employed to classify URLs, making it an efficient and interpretable solution for phishing detection. This project aims to enhance cybersecurity by providing a reliable and automated approach to identifying malicious URLs.
